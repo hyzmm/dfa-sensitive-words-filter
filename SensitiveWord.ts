@@ -4,6 +4,9 @@ export default class SensitiveWord
 
     public setFilterWord(words: string[]): void
     {
+        // sort
+        words.sort((a: string, b: string) => b.length - a.length);
+
         this.tree = Object.create(null);
 
         for (let word of words)
