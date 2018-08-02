@@ -9,8 +9,7 @@ export default class SensitiveWord
 
         this.tree = Object.create(null);
 
-        for (let word of words)
-            this.addSensitiveWord(word);
+        for (let word of words) this.addSensitiveWord(word);
 
         // console.log(JSON.stringify(this.tree, null, '\t'));
     }
@@ -25,10 +24,8 @@ export default class SensitiveWord
             {
                 node = node[c];
 
-                if (node.ended)
-                    return true;
-            }
-            else
+                if (node.ended) return true;
+            } else
             {
                 node = this.tree;
             }
@@ -40,7 +37,7 @@ export default class SensitiveWord
     public replaceSensitiveWords(sentence: string, fillChar: string = "*"): string
     {
         let returnValue: string = "";
-        let fillChars  : string = "";
+        let fillChars: string = "";
         let filteredChars: string = "";
 
         let node: any = this.tree;
@@ -65,8 +62,7 @@ export default class SensitiveWord
                     fillChars = "";
                     filteredChars = "";
                 }
-            }
-            else
+            } else
             {
                 node = this.tree;
 
@@ -87,7 +83,7 @@ export default class SensitiveWord
         return returnValue;
     }
 
-    private addSensitiveWord(word: String): void
+    private addSensitiveWord(word: string): void
     {
         let node: any = this.tree;
 
@@ -101,8 +97,7 @@ export default class SensitiveWord
             if (char in node)
             {
                 node = node[ char ];
-            }
-            else
+            } else
             {
                 const newNode: any = {};
                 node[ char ] = newNode;

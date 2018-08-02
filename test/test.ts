@@ -9,7 +9,9 @@ describe("All", () =>
 
     before(() =>
     {
-        const sensitiveWords: string[] = readFileSync(join(__dirname, "../../test/sensitive_words")).toString().split("\n");
+        const sensitiveWords: string[] = readFileSync(join(__dirname, "../../test/sensitive_words"))
+            .toString()
+            .split("\n");
         sensitiveWord.setFilterWord(sensitiveWords);
     });
 
@@ -59,12 +61,18 @@ describe("All", () =>
             assert.equal(sensitiveWord.replaceSensitiveWords("我正是日了狗了"), "我正是**狗了");
             assert.equal(sensitiveWord.replaceSensitiveWords("I fuckyou"), "I ****you");
             assert.equal(sensitiveWord.replaceSensitiveWords("I fuck you"), "I **** you");
-            assert.equal(sensitiveWord.replaceSensitiveWords("I really fuck you"), "I really **** you");
+            assert.equal(
+                sensitiveWord.replaceSensitiveWords("I really fuck you"),
+                "I really **** you",
+            );
         });
 
         it("test complex sentence", () =>
         {
-            assert.equal(sensitiveWord.replaceSensitiveWords("我日，真的是日了，fuck you"), "我日，真的是**，**** you");
+            assert.equal(
+                sensitiveWord.replaceSensitiveWords("我日，真的是日了，fuck you"),
+                "我日，真的是**，**** you",
+            );
         });
     });
 
