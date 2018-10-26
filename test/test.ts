@@ -15,6 +15,8 @@ describe("All", () => {
 
     describe("#detectSensitiveWords", () => {
         it("test match", () => {
+            assert.ok(sensitiveWord.detectSensitiveWords("加微信"));
+            assert.ok(sensitiveWord.detectSensitiveWords("+微信"));
             assert.ok(sensitiveWord.detectSensitiveWords("日了"));
             assert.ok(sensitiveWord.detectSensitiveWords("fuck"));
         });

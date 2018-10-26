@@ -12,13 +12,27 @@ export default class SensitiveWord {
         // console.log(JSON.stringify(this.tree, null, '\t'));
     }
 
-    public detectSensitiveWords(content: string): boolean {
+    /**
+     * 检查句子是否包含敏感字符
+     *
+     * @param content
+     * @param isRecursive   不必设置，由于内部调用
+     */
+    public detectSensitiveWords(content: string, isRecursive: boolean = false): boolean {
         let node: any = this.tree;
 
-        for (let c of content) {
+        for (let i = 0, len = content.length; i < len; i++) {
+            const c = content[i];
+
+            // 以当前字符为起点，检查后续是否为敏感字
+            // 有两个前提：
+            // 1. 被递归触发时，不需要检查
+            // 2. 当前节点不是敏感节点树根节点，即正在查找中，如果不在查找中，和后续流程做的事情重复了
+            if (!isRecursive && node != this.tree && this.detectSensitiveWords(content.substr(i), true)) {
+                return true;
+            }
             if (c in node) {
                 node = node[c];
-
                 if (node.ended) return true;
             } else {
                 node = this.tree;
