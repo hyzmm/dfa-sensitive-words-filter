@@ -2,5 +2,3 @@
 .idea
 dist/
 node_modules/
-package.json
-tsconfig.json
